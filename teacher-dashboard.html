@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LearnSync – Teacher Dashboard</title>
+
+  <!-- simple house-style pulled from our previous pages -->
+  <style>
+    :root   { --teacher:#0d9488; --bg:#f3f4f6; }
+    *       { box-sizing:border-box; margin:0; padding:0; }
+    body    { font-family:'Segoe UI',sans-serif; background:var(--bg); color:#111827;}
+    header  { background:var(--teacher); color:#fff; padding:1.25rem 2rem; text-align:center; }
+    h1      { font-size:1.75rem; }
+    main    { max-width:1000px; margin:2rem auto; padding:0 1rem; }
+    table   { width:100%; border-collapse:collapse; background:#fff;
+              box-shadow:0 4px 14px rgba(0,0,0,.07); border-radius:12px; overflow:hidden; }
+    th,td   { padding:.75rem 1rem; text-align:left; }
+    th      { background:#ecfdf5; font-size:.9rem; }
+    tr:not(:last-child) td { border-bottom:1px solid #e5e7eb; }
+    button  { padding:.45rem .85rem; border:none; border-radius:6px; font-weight:bold;
+              cursor:pointer; font-size:.8rem; }
+    .present { background:var(--teacher); color:#fff; }
+    .call    { background:#64748b; color:#fff; }
+    button:hover { filter:brightness(.9); }
+    /* log box */
+    #logBox { margin-top:2rem; background:#fff; padding:1rem 1.25rem; border-radius:12px;
+              box-shadow:0 4px 14px rgba(0,0,0,.07); height:180px; overflow-y:auto; }
+    #logBox h3 { margin-bottom:.5rem; }
+    .logLine  { font-family:monospace; font-size:.8rem; margin-bottom:.35rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Teacher Dashboard – Today’s Class</h1>
+</header>
+
+<main>
+  <!-- simple roster table -->
+  <table id="roster">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- these could be rendered dynamically via JS fetch; hard-coded for demo -->
+      <tr data-student-id="101" data-student-name="Priya">
+        <td>Priya</td><td>101</td>
+        <td>
+          <button class="present">Mark&nbsp;Present</button>
+          <button class="call">Call&nbsp;Student</button>
+        </td>
+      </tr>
+      <tr data-student-id="102" data-student-name="Ravi">
+        <td>Ravi</td><td>102</td>
+        <td>
+          <button class="present">Mark&nbsp;Present</button>
+          <button class="call">Call&nbsp;Student</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- notification log -->
+  <div id="logBox">
+    <h3>Notification / Log</h3>
+    <div id="logLines"></div>
+  </div>
+</main>
+
+<script>
+/*
+ * Helper – append a message locally & (soon) send it to backend.
+ */
+function appendLog(msg) {
+  const line = document.createElement('div');
+  line.className = 'logLine';
+  line.textContent = `${new Date().toLocaleTimeString()}  ${msg}`;
+  document.getElementById('logLines').prepend(line);
+}
+
+/*
+ * Click handlers for “Mark Present” and “Call Student”.
+ * Later these will POST to Spring Boot endpoints.
+ */
+document.getElementById('roster').addEventListener('click', async (evt)=>{
+  if(!evt.target.matches('button')) return;
+
+  const tr      = evt.target.closest('tr');
+  const id      = tr.dataset.studentId;
+  const name    = tr.dataset.studentName;
+  const action  = evt.target.classList.contains('present') ? 'present' : 'call';
+
+  try {
+    // -----> TO-BE-IMPLEMENTED BACKEND ROUTES (Step 2)
+    await fetch(`/api/teacher/${action}`, {
+      method : 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body   : JSON.stringify({ studentId:id, lessonId:'MATH-12' })
+    });
+
+    if(action==='present') appendLog(`✅  Attendance marked for ${name}`);
+    else                   appendLog(`📞  Call placed to ${name}`);
+  } catch(e) {
+    appendLog(`⚠️  Network error for ${name}`);
+  }
+});
+</script>
+
+</body>
+</html>

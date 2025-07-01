@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LearnSync – Student Dashboard</title>
+
+  <style>
+    :root { --primary:#4f46e5; --bg:#f3f4f6; }
+    *     { box-sizing:border-box; margin:0; padding:0; }
+    body  { font-family:'Segoe UI',sans-serif; background:var(--bg); color:#111827; }
+    header{ background:var(--primary); color:#fff; padding:1.5rem 2rem; text-align:center; }
+    h1    { font-size:1.75rem; }
+
+    main  { max-width:1100px; margin:2rem auto; padding:0 1rem; display:grid; gap:2rem; }
+
+    /* card */
+    .card{ background:#fff; padding:1.5rem 1.75rem; border-radius:12px;
+           box-shadow:0 6px 14px rgba(0,0,0,.08); }
+
+    .card h2{ font-size:1.25rem; margin-bottom:1rem; }
+
+    /* course table */
+    table{ width:100%; border-collapse:collapse; }
+    th,td{ padding:.75rem 1rem; text-align:left; }
+    th   { background:#eef2ff; font-size:.85rem; }
+    tr:not(:last-child) td{ border-bottom:1px solid #e5e7eb; }
+    button{ padding:.45rem .9rem; border:none; border-radius:6px;
+            font-weight:bold; cursor:pointer; font-size:.8rem;
+            background:var(--primary); color:#fff; }
+    button:hover{ filter:brightness(.9); }
+
+    /* payments */
+    .balance{ font-size:1.5rem; font-weight:bold; margin-bottom:1rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Student Dashboard – Welcome, Priya</h1>
+</header>
+
+<main>
+
+  <!-- COURSES -->
+  <section class="card">
+    <h2>Enrolled Courses</h2>
+    <table>
+      <thead>
+        <tr><th>Course</th><th>Instructor</th><th>Status</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr data-course-id="MATH101">
+          <td>Math Fundamentals</td><td>Ram Kumar</td><td>Ongoing</td>
+          <td><button onclick="openCourse('MATH101')">Open</button></td>
+        </tr>
+        <tr data-course-id="ENG102">
+          <td>English Literature</td><td>Anita Das</td><td>Ongoing</td>
+          <td><button onclick="openCourse('ENG102')">Open</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- QUIZZES -->
+  <section class="card">
+    <h2>Upcoming Quizzes</h2>
+    <table>
+      <thead>
+        <tr><th>Quiz</th><th>Course</th><th>Date</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr data-quiz-id="QUIZ-MATH-1">
+          <td>Algebra Basics</td><td>Math Fundamentals</td><td>28 Jun 2025</td>
+          <td><button onclick="startQuiz('QUIZ-MATH-1')">Start Quiz</button></td>
+        </tr>
+        <tr data-quiz-id="QUIZ-ENG-1">
+          <td>Poetry Comprehension</td><td>English Literature</td><td>30 Jun 2025</td>
+          <td><button onclick="startQuiz('QUIZ-ENG-1')">Start Quiz</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PAYMENTS -->
+  <section class="card">
+    <h2>Payments</h2>
+    <div class="balance">Outstanding Balance: ₹<span id="balanceAmt">3,500</span></div>
+    <button onclick="payNow()">Pay Now</button>
+  </section>
+
+</main>
+
+<script>
+/* ---------- Placeholder JS hooks ---------- */
+function openCourse(courseId){
+  // TODO: redirect or fetch course page
+  alert('Open course: '+courseId);
+}
+
+function startQuiz(quizId){
+  // TODO: redirect to quiz engine
+  alert('Launching quiz: '+quizId);
+}
+
+function payNow(){
+  // TODO: integrate Razorpay/Stripe etc.
+  alert('Redirecting to payment gateway…');
+}
+</script>
+
+</body>
+</html>

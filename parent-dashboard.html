@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LearnSync – Parent Dashboard</title>
+
+  <style>
+    :root   { --parent: #f97316; --bg: #f3f4f6; }
+    *       { box-sizing: border-box; margin: 0; padding: 0; }
+    body    { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #111827; }
+    header  { background: var(--parent); color: white; padding: 1.5rem 2rem; text-align: center; }
+    h1      { font-size: 1.75rem; }
+
+    main    { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+
+    .card h2 {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      color: #333;
+    }
+
+    .attendance {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .present   { color: green; font-weight: bold; }
+    .absent    { color: red; font-weight: bold; }
+
+    #logBox {
+      background: #f9fafb;
+      padding: 1rem;
+      border-radius: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #e5e7eb;
+    }
+
+    .logLine {
+      font-family: monospace;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Parent Dashboard – Welcome</h1>
+</header>
+
+<main>
+  <!-- Attendance Card -->
+  <div class="card">
+    <h2>Today's Attendance</h2>
+    <div class="attendance">Priya – <span class="present">Present</span></div>
+    <!-- Replace with dynamic logic later -->
+  </div>
+
+  <!-- Notification Log -->
+  <div class="card">
+    <h2>Activity / Notification Log</h2>
+    <div id="logBox">
+      <div class="logLine">🟢 08:58 AM – Student Priya joined class.</div>
+      <div class="logLine">✅ 09:00 AM – Attendance marked by Teacher Ram.</div>
+      <div class="logLine">📴 10:05 AM – Class ended. Final: Present</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 LearnSync | Empowering Families
+</footer>
+
+</body>
+</html>
